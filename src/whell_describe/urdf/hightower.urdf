@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="myrobot">
+
+    <link name="world">
+    </link>
+
+  <link name="world_link" >
+    <visual>
+        <geometry>
+            <box size = "0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="yellow">
+            <color rgba="0.5 0.3 0 0.5"/>
+        </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size = "1 1 0.01" />
+      </geometry>
+    </collision-->
+  </link>
+
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="world_link"/>
+    </joint>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="world_link"/>
+        <child link="base_link"/>
+    </joint>
+
+
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.369999999999999 0.140873985329065 -2.48917421508512E-16"
+        rpy="0 0 0" />
+      <mass
+        value="27.2776620591522" />
+      <inertia
+        ixx="1.422850730749"
+        ixy="-1.47949156911311E-15"
+        ixz="1.75534409855969E-16"
+        iyy="1.98472995478301"
+        iyz="-4.16964559380003E-19"
+        izz="0.578653268674531" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/hightower.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/hightower.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+    <gazebo reference="base_link">
+        <mu1>7</mu1>
+        <mu2>7</mu2>
+        <self_collide>1</self_collide>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
+        <material>Gazebo/Turquoise</material>
+    </gazebo>
+
+
+
+
+</robot>

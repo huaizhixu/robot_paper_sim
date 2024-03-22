@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="myrobot">
+
+
+    <link name="world">
+    </link>
+
+  <link name="world_link" >
+    <visual>
+        <geometry>
+            <box size = "0.01 0.01 0.01" />
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="yellow">
+            <color rgba="0.5 0.3 0 0.5"/>
+        </material>
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size = "1 1 0.01" />
+      </geometry>
+    </collision-->
+  </link>
+
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="world_link"/>
+    </joint>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="world_link"/>
+        <child link="base_link"/>
+    </joint>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.34994193431908 0.0422471224810819 0.110375168050282"
+        rpy="0 0 0" />
+      <mass
+        value="5.02897041742077" />
+      <inertia
+        ixx="0.0233879685222951"
+        ixy="-8.16754252772481E-07"
+        ixz="-2.9496279544748E-07"
+        iyy="0.631292145084987"
+        iyz="1.77507646731549E-05"
+        izz="0.61692185796762" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/surfacepath.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.0392156862745098 0.490196078431373 0.709803921568627 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/surfacepath.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+    <gazebo reference="base_link">
+        <mu1>7</mu1>
+        <mu2>7</mu2>
+        <self_collide>1</self_collide>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
+        <material>Gazebo/Lanes_6</material>
+    </gazebo>
+
+
+
+
+</robot>

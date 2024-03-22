@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="myrobot2">
+
+    <link name="world">
+  </link>
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-1.83450203172901 0.142276541425279 2.10350874216609"
+        rpy="0 0 0" />
+      <mass
+        value="55.0687083644952" />
+      <inertia
+        ixx="0.935368599462166"
+        ixy="-0.129053601896683"
+        ixz="-1.04938127713822E-08"
+        iyy="1.72350394187313"
+        iyz="-3.77617773319357E-09"
+        izz="1.06328898234369" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/obstacle.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://whell_describe/meshes/obstacle.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

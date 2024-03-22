@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<robot name="myrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/myrobot</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>350.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>base_link</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
+
+<xacro:arg name="DDDD" default="false"/>
+
+    <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
+    <xacro:if value="$(arg DDDD)">
+  <!-- Show the trajectory of trunk center. -->
+  <gazebo>
+    <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
+      <frequency>10</frequency>
+      <plot>
+        <link>dummy</link>
+        <pose>-4.46807509552636E-07 -3.03780031174009E-06 -0.0203695556415421 0 0 0</pose>
+        <material>Gazebo/SkyBlue</material>
+      </plot>
+    </plugin>
+  </gazebo>
+    </xacro:if>
+
+
+
+
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>800</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>sim_imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>800</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+
+
+
+  <!--vitual joint leg-->
+
+  <gazebo>
+    <joint name="right_lower_joint" type="revolute">
+      <parent>shank2_Link</parent>
+      <child>shank1_Link</child>
+      <pose>0.004 -0.12542 -0.12911 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <friction>0.005</friction>
+        </dynamics>
+      </axis>
+    </joint>
+  </gazebo>
+  <!--vitual joint leg-->
+  <gazebo>
+    <joint name="left_lower_joint" type="revolute">
+      <parent>shank4_Link</parent>
+      <child>shank3_Link</child>
+      <pose>-0.004 0.12542 -0.12911 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <friction>0.005</friction>
+        </dynamics>
+
+      </axis>
+    </joint>
+  </gazebo>
+
+
+
+
+  <!--stand up small wheel color-->
+  <!-- <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" /> -->
+
+  <gazebo reference="wheel1_Link">
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="wheel2_Link">
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Red</material>
+
+  </gazebo>
+
+  <!--ball big wheel color-->
+
+  <gazebo reference="wheel3_Link">
+    <mu2>100.0</mu2>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <material>Gazebo/Orange</material>
+
+  </gazebo>
+
+  <gazebo reference="wheel4_Link">
+    <mu2>100.0</mu2>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <material>Gazebo/Orange</material>
+
+  </gazebo>
+
+
+  <!--gazebo link colors-->
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+
+<!-- joint Gazebo/DarkYellow leg2_Link-->
+  <gazebo reference="leg1_Link">
+    <material>Gazebo/DarkYellow</material>
+  </gazebo>
+    <gazebo reference="leg3_Link">
+    <material>Gazebo/LightBlueLaser</material>
+  </gazebo>
+
+</robot>

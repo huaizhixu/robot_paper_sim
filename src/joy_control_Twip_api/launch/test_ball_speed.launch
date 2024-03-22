@@ -1,0 +1,9 @@
+<launch>    
+    <!-- 启动手柄节点，respawn="true"表示节点挂掉时会自动重启 -->
+    <node respawn="true" pkg="joy" type="joy_node" name="joystick" />
+
+    <node pkg="joy_control_Twip_api" type="joy_jump_control" name="joy_jump_control" />
+
+    <node name="ak80_motor_api" pkg="ak80_motor_api" type="motor_ak80_publish_info" output="screen"/>
+
+</launch>

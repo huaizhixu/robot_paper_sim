@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<robot name="myrobot"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="world">
+    </link>
+
+  <link name="world_link" >
+    <visual>
+        <geometry>
+            <box size = "0.01 0.01 0.01" />
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="yellow">
+            <color rgba="0.5 0.3 0 0.5"/>
+        </material>
+        
+    </visual>
+    <!--collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size = "1 1 0.01" />
+      </geometry>
+    </collision-->
+  </link>
+
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="world_link"/>
+    </joint>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="world_link"/>
+        <child link="base_link"/>
+    </joint>
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="-1.83450203172901 0.142276541425279 2.10350874216609" rpy="0 0 0" />
+            <mass value="55.0687083644952" />
+            <inertia ixx="0.935368599462166" ixy="-0.129053601896683" ixz="-1.04938127713822E-08" iyy="1.72350394187313" iyz="-3.77617773319357E-09" izz="1.06328898234369" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://whell_describe/meshes/obstacle.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://whell_describe/meshes/obstacle.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <gazebo reference="base_link">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <self_collide>1</self_collide>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
+        <material>Gazebo/DarkMagentaTransparent</material>
+    </gazebo>
+
+
+</robot>

@@ -1,0 +1,8 @@
+<launch>    
+    <!-- 启动手柄节点，respawn="true"表示节点挂掉时会自动重启 -->
+    <node respawn="true" pkg="joy" type="joy_node" name="joystick" />
+
+    <node pkg="joy_control_Twip_api" type="target_joy_move" name="joy_control" />
+
+</launch>
+
